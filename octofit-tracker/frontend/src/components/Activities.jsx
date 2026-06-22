@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react'
 
-export default function Activities({ apiBase }) {
+const CODESPACE = import.meta.env.VITE_CODESPACE_NAME;
+const API_BASE = CODESPACE ? `https://${CODESPACE}-8000.app.github.dev/api` : 'http://localhost:8000/api';
+
+export default function Activities() {
   const [data, setData] = useState([])
   const [page, setPage] = useState(1)
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`${apiBase}/activities?page=${page}`)
+      const res = await fetch(`${API_BASE}/activities/?page=${page}`)
       const json = await res.json()
       // support both paginated {data: [], meta: {}} and plain array
       setData(Array.isArray(json) ? json : json.data || [])
     }
     fetchData()
-  }, [apiBase, page])
+  }, [page])
 
   return (
     <div>
