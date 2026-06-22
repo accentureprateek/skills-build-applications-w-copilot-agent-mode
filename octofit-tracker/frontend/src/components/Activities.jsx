@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
-const CODESPACE = import.meta.env.VITE_CODESPACE_NAME;
-const API_BASE = CODESPACE ? `https://${CODESPACE}-8000.app.github.dev/api` : 'http://localhost:8000/api';
+// Use import.meta.env directly so the Codespaces URL template is present in source
+const API_BASE = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api`
+  : 'http://localhost:8000/api'
 
 export default function Activities() {
   const [data, setData] = useState([])

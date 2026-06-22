@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-const CODESPACE = import.meta.env.VITE_CODESPACE_NAME;
-const API_BASE = CODESPACE ? `https://${CODESPACE}-8000.app.github.dev/api` : 'http://localhost:8000/api';
+const API_BASE = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api`
+  : 'http://localhost:8000/api'
 
 export default function Users() {
   const [users, setUsers] = useState([])
