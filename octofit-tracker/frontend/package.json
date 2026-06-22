@@ -8,8 +8,8 @@
     "preview": "vite preview --port 5173"
   },
   "dependencies": {
-    "react": "19.x",
-    "react-dom": "19.x"
+    "react": "19.0",
+    "react-dom": "19.0"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
