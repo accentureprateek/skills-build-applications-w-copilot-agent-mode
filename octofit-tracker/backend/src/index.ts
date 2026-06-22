@@ -1,6 +1,6 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { connectDB } from './config/database';
 
 dotenv.config();
 
@@ -13,15 +13,13 @@ app.get('/', (req, res) => {
   res.send('OctoFit Tracker backend running');
 });
 
-const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/octofit';
-
-mongoose.connect(mongoUri)
-  .then(() => {
-    console.log('Connected to MongoDB');
+(async () => {
+  try {
+    await connectDB();
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
     });
-  })
-  .catch((err) => {
-    console.error('MongoDB connection error', err);
-  });
+  } catch (err) {
+    console.error('Failed to start server', err);
+  }
+})();
