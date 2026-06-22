@@ -1,7 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/database';
-import { getApiBaseUrl } from './config/api';
 import usersRouter from './routes/users';
 import activitiesRouter from './routes/activities';
 
@@ -20,15 +19,5 @@ app.get('/', (req, res) => {
   res.send('OctoFit Tracker backend running');
 });
 
-(async () => {
-  try {
-    await connectDB();
-    app.listen(port, () => {
-      const base = getApiBaseUrl();
-      console.log(`Server running on port ${port}`);
-      console.log(`API base URL: ${base}`);
-    });
-  } catch (err) {
-    console.error('Failed to start server', err);
-  }
-})();
+// Export app, port and connectDB for a separate server entrypoint
+export { app, port, connectDB };
